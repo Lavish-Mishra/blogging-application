@@ -1,0 +1,132 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.body {
+  background: #DFF2EB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background: #B9E5E8;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.input-groups {
+  margin-bottom: 15px;
+}
+
+.input-groups label {
+  display: block;
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.input-groups input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background: #DFF2EB;
+  color: #000000;
+}
+
+.extra-links {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.extra-links a {
+  color: #4A628A;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.btn-outline-warning {
+  background: #7AB2D3;
+}
+
+[data-bs-theme="light"] {
+  .blog-content, .content-section {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+  .article-titles {
+    color: black;
+  }
+}
+
+[data-bs-theme="dark"] {
+  .login-container {
+    background: #9ea9b7;
+  }
+  
+  .body, .main{
+    background: #555;
+  }
+  .extra-links a {
+    color: #000000;
+  }
+  .input-groups input {
+    background: #333333;
+    
+  }
+  .blog-content, .content-section {
+    box-shadow: rgb(255, 255, 255) 0px 10px 20px 0px, rgb(255, 255, 255) 0px 2px 6px 2px;
+  }
+  .article-titles {
+    color: white;
+  }
+}

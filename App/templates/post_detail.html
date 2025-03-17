@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container">
+    <article class="media content-section row mt-3" style="border-top-left-radius: 2% 10%;
+    border-top-right-radius: 2% 10%;
+    border-bottom-right-radius: 2% 10%;
+    border-bottom-left-radius: 2% 10%;
+    display: flex;">
+
+        <img class="rounded-circle col-4" src="{{ object.author.profile.image.url }}" alt="profile pic" style="width: 90; height: 60;">
+        <div class="media-body col-4" style="flex: 60%;">
+            <div class="articles-metadata">
+                <a href="{% url 'user-posts' object.author.username%}">{{ object.author }} </a>
+                <small class="text-muted">{{ object.date_posted|date:" F d, Y" }}</small>
+                <a href="{% url 'create-comment' object.pk %}">Comment</a>
+                {% if object.author == user %}
+                <a href="{% url 'post-update' object.id %}">Update</a>
+                <a href="{% url 'post-delete' object.id %}">Delete</a>
+                {% endif %}
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            <p>{{ object.content|linebreaksbr }}</p>
+        
+        
+        <hr>
+        <!-- LIKES -->
+        {% if user.is_authenticated %}
+            <form action="{% url 'post-like' object.id %}" method="POST">
+            {% csrf_token %}
+                {% if post_is_liked %}
+                    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info" style="background: rgb(105, 191, 231);">Unlike</button>
+                {% else %}
+                    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">Like</button>
+                {% endif %}
+            </form>
+        {% else %}
+            <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+        {% endif %}
+        <strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+
+        </div>
+        <div class="col-4" style="flex: 30%;">
+        <h4><b>Comments</b></h4>
+        <div>
+            {% for comment in comments %}
+            <div class="articles-metadata">
+                <img class="rounded-circle col-4" src="{{ comment.author.profile.image.url }}" alt="profile pic" style="width: 30; height: 30;">
+                <a href="{% url 'user-posts' comment.author.username%}">{{ comment.author }} </a>
+                <small class="text-muted">{{ comment.date_commented|date:" F d, Y" }}</small>
+                <p style="margin-left: 2vw;">{{ comment.content }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </article>
+</div>
+{% endblock %}

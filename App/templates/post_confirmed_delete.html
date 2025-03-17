@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="body">
+        <div class="content-section" style="width: 50vw;">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group" style="text-align: center;">
+                    <legend class="border-bottom" style="font-size: 2rem;"><b>Delete Post</b></legend>
+                    <h4 style="font-family: cursive;margin-bottom: 20px;">Are you sure you want to delete the Post "{{ object.title }}"</h4>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit" style="margin-bottom: 10px;">Yes, Delete</button>
+                    
+                    <br>
+                    <a class="btn btn-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
