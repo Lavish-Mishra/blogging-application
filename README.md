@@ -1,5 +1,7 @@
 # **Blogging Application** 
 
+## The project is hosted on https://lavish25.pythonanywhere.com/
+
 ## Users can post their blogs on the web application and can interact with other user's blogs.
 
 
