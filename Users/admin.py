@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import profile
+#from django.contrib.auth.models import User
+from .models import profile, CustomUser
 
 # Register your models here.
-admin.site.register(profile)
+admin.site.register(CustomUser)
+
+@admin.register(profile)
+class ProfileAdmin(admin.ModelAdmin):
+    #list_display = ('user',)
+    pass
