@@ -7,7 +7,7 @@
         <img class="rounded-circle col-6" src="{{ post.author.profile.image.url }}" alt="profile pic" style="width: 90; height: 60;">
         <div class="media-body col-6">
             <div class="articles-metadata">
-                <a href="{% url 'user-posts' post.author.username%}">{{ post.author }} </a>
+                <a href="{% url 'user-posts' post.author.email %}">{{ post.author }} </a>
                 <small class="text-muted">{{ post.date_posted|date:" F d, Y" }}</small>
                 {% if post.author == user %}
                     <a href="{% url 'post-update' post.id %}">Update</a>

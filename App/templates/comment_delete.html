@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="body">
+        <div class="content-section" style="width: 50vw;">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <p>Delete Comment?</p>
+                <button type="submit">Yes Delete</button>
+                <br>
+                <a class="btn btn-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

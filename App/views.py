@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post, Comment
-from django.contrib.auth.models import User
+from Users.models import CustomUser as User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -24,7 +24,7 @@ class UserPostListView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        user = get_object_or_404(User, email=self.kwargs.get('email'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 class PostDetailView(DetailView):
@@ -85,7 +85,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         else:
             return False
-    
+
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     template_name = 'comment_form.html'
@@ -97,6 +97,20 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         posts = Post.objects.get(pk=pri_key)
         form.instance.post = posts
         return super().form_valid(form)
+    
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = "comment_delete.html"
+    success_url = "/"
+    def test_func(self):
+        comment = self.get_object()
+        post = comment.post
+        COMMENT_POST_ID = post.id
+        if self.request.user == comment.author or self.request.user == post.author:
+            return True
+        else:
+            False
+
 def about(request):
     return render(request,'about.html',{'title':'About'})
 
